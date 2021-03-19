@@ -43,6 +43,7 @@ export const filters = [
     // you can't change "queryParamNames: ['dates'],"
     queryParamNames: ['dates', 'minDuration'],
     config: {
+      masterkey: "Dates",
       // A global time zone to use in availability searches. As listings
       // can be in various time zones, we must decide what time zone we
       // use in search when looking for available listings within a
@@ -73,49 +74,26 @@ export const filters = [
     // Price filter configuration
     // Note: unlike most prices this is not handled in subunits
     config: {
+      masterkey: "Price",
       min: 0,
       max: 100,
       step: 1,
     },
   },
-  {
-    id: 'keyword',
-    label: 'Keyword',
-    type: 'KeywordFilter',
-    group: 'secondary',
-    // Note: KeywordFilter is fixed filter,
-    // you can't change "queryParamNames: ['keywords'],"
-    queryParamNames: ['keywords'],
-    // NOTE: If you are ordering search results by distance
-    // the keyword search can't be used at the same time.
-    // You can turn on/off ordering by distance from config.js file.
-    config: {},
-  },
-  {
-    id: 'yogaStyles',
-    label: 'Yoga styles',
-    type: 'SelectMultipleFilter',
-    group: 'secondary',
-    queryParamNames: ['pub_yogaStyles'],
-    config: {
-      // Optional modes: 'has_all', 'has_any'
-      // https://www.sharetribe.com/api-reference/marketplace.html#extended-data-filtering
-      searchMode: 'has_all',
+  // {
+  //   id: 'keyword',
+  //   label: 'Keyword',
+  //   type: 'KeywordFilter',
+  //   group: 'secondary',
+  //   // Note: KeywordFilter is fixed filter,
+  //   // you can't change "queryParamNames: ['keywords'],"
+  //   queryParamNames: ['keywords'],
+  //   // NOTE: If you are ordering search results by distance
+  //   // the keyword search can't be used at the same time.
+  //   // You can turn on/off ordering by distance from config.js file.
+  //   config: {},
+  // },
 
-      // "key" is the option you see in Flex Console.
-      // "label" is set here for this web app's UI only.
-      // Note: label is not added through the translation files
-      // to make filter customizations a bit easier.
-      options: [
-        { key: 'ashtanga', label: 'Ashtanga' },
-        { key: 'hatha', label: 'Hatha' },
-        { key: 'kundalini', label: 'Kundalini' },
-        { key: 'restorative', label: 'Restorative' },
-        { key: 'vinyasa', label: 'Vinyasa' },
-        { key: 'yin', label: 'Yin' },
-      ],
-    },
-  },
   {
     id: 'musicInstruments',
     label: 'Music instruments',
@@ -123,6 +101,7 @@ export const filters = [
     group: 'primary',
     queryParamNames: ['pub_musicInstruments'],
     config: {
+      masterkey: "Instruments",
       // Optional modes: 'has_all', 'has_any'
       // https://www.sharetribe.com/api-reference/marketplace.html#extended-data-filtering
       searchMode: 'has_any',
@@ -145,12 +124,52 @@ export const filters = [
     },
   },
   {
+    id: 'level',
+    label: 'Level',
+    type: 'SelectMultipleFilter',
+    group: 'primary',
+    queryParamNames: ['pub_level'],
+    config: {
+      masterkey: "Levels",
+      searchMode: 'has_any',
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for the UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: [
+        { key: 'beginner', label: 'Beginner' },
+        { key: 'intermediate', label: 'Intermediate' },
+        { key: 'advanced', label: 'Advanced' },
+        { key: 'pro', label: 'Professional' },
+      ],
+    },
+  },
+  {
+    id: 'instrumentProvided',
+    label: 'Instrument Provided',
+    type: 'SelectSingleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_instrumentProvided'],
+    config: {
+      masterkey: "InstrumentProvided",
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for the UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: [
+        { key: "true", label: 'Yes' },
+        { key: "false", label: 'No' },
+      ],
+    },
+  },
+  {
     id: 'courseLocations',
     label: 'Course Locations',
     type: 'SelectMultipleFilter',
     group: 'secondary',
     queryParamNames: ['pub_courseLocations'],
     config: {
+      masterkey: "CourseLocations",
       // Optional modes: 'has_all', 'has_any'
       // https://www.sharetribe.com/api-reference/marketplace.html#extended-data-filtering
       searchMode: 'has_any',
@@ -174,6 +193,7 @@ export const filters = [
     group: 'secondary',
     queryParamNames: ['pub_certificate'],
     config: {
+      masterkey: "Certificate",
       // "key" is the option you see in Flex Console.
       // "label" is set here for the UI only.
       // Note: label is not added through the translation files
@@ -195,6 +215,7 @@ export const filters = [
     group: 'secondary',
     queryParamNames: ['pub_method'],
     config: {
+      masterkey: "Methods",
       // "key" is the option you see in Flex Console.
       // "label" is set here for the UI only.
       // Note: label is not added through the translation files
@@ -206,43 +227,6 @@ export const filters = [
         { key: 'oral', label: 'Oral' },
         { key: 'solfege', label: 'Solfège' },
         { key: 'tabs', label: 'Tablatures' },
-      ],
-    },
-  },
-  {
-    id: 'level',
-    label: 'Level',
-    type: 'SelectMultipleFilter',
-    group: 'primary',
-    queryParamNames: ['pub_level'],
-    config: {
-      searchMode: 'has_any',
-      // "key" is the option you see in Flex Console.
-      // "label" is set here for the UI only.
-      // Note: label is not added through the translation files
-      // to make filter customizations a bit easier.
-      options: [
-        { key: 'beginner', label: 'Beginner' },
-        { key: 'intermediate', label: 'Intermediate' },
-        { key: 'advanced', label: 'Advanced' },
-        { key: 'pro', label: 'Professional' },
-      ],
-    },
-  },
-  {
-    id: 'instrumentProvided',
-    label: 'Instrument Provided',
-    type: 'SelectSingleFilter',
-    group: 'secondary',
-    queryParamNames: ['pub_instrumentProvided'],
-    config: {
-      // "key" is the option you see in Flex Console.
-      // "label" is set here for the UI only.
-      // Note: label is not added through the translation files
-      // to make filter customizations a bit easier.
-      options: [
-        { key: true, label: 'Yes' },
-        { key: false, label: 'No' },
       ],
     },
   },
@@ -272,6 +256,6 @@ export const sortConfig = {
     // The relevance is only used for keyword search, but the
     // parameter isn't sent to the Marketplace API. The key is purely
     // for handling the internal state of the sorting dropdown.
-    { key: 'relevance', label: 'Relevance', longLabel: 'Relevance (Keyword search)' },
+    // { key: 'relevance', label: 'Relevance', longLabel: 'Relevance (Keyword search)' },
   ],
 };

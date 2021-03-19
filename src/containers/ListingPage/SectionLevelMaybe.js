@@ -1,17 +1,20 @@
 import React from 'react';
-import { FormattedMessage } from '../../util/reactIntl';
+import { FormattedMessage, injectIntl } from '../../util/reactIntl';
 import { PropertyGroup } from '../../components';
 
 import css from './ListingPage.module.css';
 
 const SectionInstrumentsMaybe = props => {
-  const { options, publicData } = props;
+  const { options, publicData, intl } = props;
   if (!publicData) {
     return null;
   }
 
   const selectedOptions = publicData && publicData.level ? publicData.level : [];
-  const selectedConfigOptions = options.filter(o => selectedOptions.find(s => s === o.key));
+  const selectedConfigOptions = options.filter(o => selectedOptions.find(s => s === o.key)).map(e => {
+    e.label = intl.formatMessage({ id: `Levels.${e.key.toString()}` })
+    return e
+  });
 
   return (
     <div className={css.sectionFeatures}>
@@ -28,4 +31,4 @@ const SectionInstrumentsMaybe = props => {
   );
 };
 
-export default SectionInstrumentsMaybe;
+export default injectIntl(SectionInstrumentsMaybe);

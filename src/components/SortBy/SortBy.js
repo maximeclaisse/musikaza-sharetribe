@@ -13,6 +13,7 @@ const SortBy = props => {
   const { relevanceKey, queryParamName } = config.custom.sortConfig;
 
   const options = config.custom.sortConfig.options.map(option => {
+    option.label = intl.formatMessage({ id: `SortBy.${option.key.toString()}` })
     const isRelevance = option.key === relevanceKey;
     return {
       ...option,
@@ -20,6 +21,7 @@ const SortBy = props => {
         (isRelevance && !isConflictingFilterActive) || (!isRelevance && isConflictingFilterActive),
     };
   });
+  
   const defaultValue = 'createdAt';
   const componentProps = {
     urlParam: queryParamName,

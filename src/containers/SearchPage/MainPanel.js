@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import omit from 'lodash/omit';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
-import { FormattedMessage } from '../../util/reactIntl';
+import { FormattedMessage, injectIntl } from '../../util/reactIntl';
 import { createResourceLocatorString } from '../../util/routes';
 import { isAnyFilterActive } from '../../util/search';
 import { propTypes } from '../../util/types';
@@ -167,6 +167,7 @@ class MainPanel extends Component {
       searchParamsForPagination,
       showAsModalMaxWidth,
       filterConfig,
+      intl,
       sortConfig,
     } = this.props;
 
@@ -250,6 +251,7 @@ class MainPanel extends Component {
           {primaryFilters.map(config => {
             return (
               <FilterComponent
+                intl={intl}
                 key={`SearchFiltersPrimary.${config.id}`}
                 idPrefix="SearchFiltersPrimary"
                 filterConfig={config}
@@ -281,6 +283,7 @@ class MainPanel extends Component {
           {filterConfig.map(config => {
             return (
               <FilterComponent
+                intl={intl}
                 key={`SearchFiltersMobile.${config.id}`}
                 idPrefix="SearchFiltersMobile"
                 filterConfig={config}
@@ -306,6 +309,7 @@ class MainPanel extends Component {
               {secondaryFilters.map(config => {
                 return (
                   <FilterComponent
+                    intl={intl}
                     key={`SearchFiltersSecondary.${config.id}`}
                     idPrefix="SearchFiltersSecondary"
                     filterConfig={config}
@@ -379,4 +383,4 @@ MainPanel.propTypes = {
   }).isRequired,
 };
 
-export default MainPanel;
+export default injectIntl(MainPanel);

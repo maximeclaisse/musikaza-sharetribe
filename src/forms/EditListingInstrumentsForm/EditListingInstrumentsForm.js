@@ -55,8 +55,6 @@ const EditListingInstrumentsFormComponent = props => (
       const instrumentProvidedName = "instrumentProvided"
       const instrumentProvidedOptions = findOptionsForSelectFilter('instrumentProvided', filterConfig);
 
-      intl.formatMessage({ id: 'Instruments.drums' })
-
 
       const options = findOptionsForSelectFilter('musicInstruments', filterConfig).map(e => {
         e.label = intl.formatMessage({ id: `Instruments.${e.key}` })

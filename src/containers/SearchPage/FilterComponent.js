@@ -18,6 +18,7 @@ const FilterComponent = props => {
     filterConfig,
     urlQueryParams,
     initialValues,
+    intl,
     getHandleChangedValueFn,
     ...rest
   } = props;
@@ -29,12 +30,35 @@ const FilterComponent = props => {
   const componentId = `${prefix}.${id.toLowerCase()}`;
   const name = id.replace(/\s+/g, '-').toLowerCase();
 
+
+
+  let label_translated = label
+
+  if (config.masterkey) {
+    // Manage translation for filter title
+    label_translated = intl.formatMessage({ id: `${config.masterkey}.title` })
+
+    if (config.options) {
+      // Translate options
+      config.options = config.options.map(e => {
+        e.label = intl.formatMessage({ id: `${config.masterkey}.${e.key.toString()}` })
+        return e
+      })
+      // Sort options if needed
+      if (["Instruments", "Certificate"].includes(config.masterkey)) config.options = config.options.sort((a, b) => (a.label > b.label) ? 1 : -1)
+    }
+  }
+
+  
+
+  
+
   switch (type) {
     case 'SelectSingleFilter': {
       return (
         <SelectSingleFilter
           id={componentId}
-          label={label}
+          label={label_translated}
           queryParamNames={queryParamNames}
           initialValues={initialValues(queryParamNames)}
           onSelect={getHandleChangedValueFn(useHistoryPush)}
@@ -47,7 +71,7 @@ const FilterComponent = props => {
       return (
         <SelectMultipleFilter
           id={componentId}
-          label={label}
+          label={label_translated}
           name={name}
           queryParamNames={queryParamNames}
           initialValues={initialValues(queryParamNames)}
@@ -61,7 +85,7 @@ const FilterComponent = props => {
       return (
         <BookingDateRangeFilter
           id={componentId}
-          label={label}
+          label={label_translated}
           queryParamNames={queryParamNames}
           initialValues={initialValues(queryParamNames)}
           onSubmit={getHandleChangedValueFn(useHistoryPush)}
@@ -74,7 +98,7 @@ const FilterComponent = props => {
       return (
         <BookingDateRangeLengthFilter
           id={componentId}
-          label={label}
+          label={label_translated}
           queryParamNames={queryParamNames}
           initialValues={initialValues(queryParamNames)}
           onSubmit={getHandleChangedValueFn(useHistoryPush)}
@@ -87,7 +111,7 @@ const FilterComponent = props => {
       return (
         <PriceFilter
           id={componentId}
-          label={label}
+          label={label_translated}
           queryParamNames={queryParamNames}
           initialValues={initialValues(queryParamNames)}
           onSubmit={getHandleChangedValueFn(useHistoryPush)}
@@ -100,7 +124,7 @@ const FilterComponent = props => {
       return (
         <KeywordFilter
           id={componentId}
-          label={label}
+          label={label_translated}
           name={name}
           queryParamNames={queryParamNames}
           initialValues={initialValues(queryParamNames)}

@@ -388,7 +388,10 @@ export class ListingPageComponent extends Component {
     const yogaStylesOptions = findOptionsForSelectFilter('yogaStyles', filterConfig);
     const instrumentsOptions = findOptionsForSelectFilter('musicInstruments', filterConfig);
     const certificateOptions = findOptionsForSelectFilter('certificate', filterConfig);
+    const courseLocationsOptions = findOptionsForSelectFilter('courseLocations', filterConfig);
     const levelOptions = findOptionsForSelectFilter('level', filterConfig);
+
+    courseLocationsOptions
 
     return (
       <Page
@@ -446,6 +449,7 @@ export class ListingPageComponent extends Component {
                   <SectionMapMaybe
                     geolocation={geolocation}
                     publicData={publicData}
+                    options={courseLocationsOptions}
                     listingId={currentListing.id}
                   />
                   <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />

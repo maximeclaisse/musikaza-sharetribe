@@ -115,7 +115,8 @@ export const ListingCardComponent = props => {
           </div>
           <div className={css.certificateInfo}>
             {certificate && !certificate.hideFromListingInfo ? (
-              <span>{certificate.label}</span>
+              // <span>{certificate.label}</span>
+              <span>{intl.formatMessage({ id: `Certificate.${certificate.key.toString()}` })}</span>
             ) : null}
           </div>
         </div>

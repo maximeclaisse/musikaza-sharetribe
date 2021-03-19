@@ -1,11 +1,11 @@
 import React from 'react';
-import { FormattedMessage } from '../../util/reactIntl';
+import { FormattedMessage, injectIntl } from '../../util/reactIntl';
 import { PropertyGroup } from '../../components';
 
 import css from './ListingPage.module.css';
 
 const SectionInstrumentsMaybe = props => {
-  const { options, provided_option, publicData } = props;
+  const { options, provided_option, publicData, intl } = props;
   if (!publicData) {
     return null;
   }
@@ -16,10 +16,10 @@ const SectionInstrumentsMaybe = props => {
   const instrumentProvided = publicData && publicData.instrumentProvided ? publicData.instrumentProvided : false;
   let instrumentProvidedContent;
 
-  if (instrumentProvided) {
-    instrumentProvidedContent = <p>Note : Instrument provided by teacher</p>;
+  if (instrumentProvided == "true") {
+    instrumentProvidedContent = <p>{intl.formatMessage({ id: `ListingPage.instrumentProvided` })}</p>;
   } else {
-    instrumentProvidedContent = <p>Note : Please bring your own instrument</p>;
+    instrumentProvidedContent = <p>{intl.formatMessage({ id: `ListingPage.instrumentNotProvided` })}</p>;
   }
 
   return (
@@ -38,4 +38,4 @@ const SectionInstrumentsMaybe = props => {
   );
 };
 
-export default SectionInstrumentsMaybe;
+export default injectIntl(SectionInstrumentsMaybe);
