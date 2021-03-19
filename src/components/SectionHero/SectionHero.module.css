@@ -64,7 +64,7 @@
 .heroMainTitle {
   @apply --marketplaceHeroTitleFontStyles;
 
-  font-family: 'work sans', Helvetica, Arial, sans-serif;
+  font-family: 'Work Sans', Helvetica, Arial, sans-serif;
   text-transform: uppercase;
   /* font-weight: bold; */
   letter-spacing: 0;
